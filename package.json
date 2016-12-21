@@ -1,0 +1,26 @@
+{
+  "name": "easy-css-guide",
+  "version": "0.0.1",
+  "description": "I am summarizing my CSS guideline.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asjmtz/easy-css.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asjmtz/easy-css/issues"
+  },
+  "homepage": "https://github.com/asjmtz/easy-css#readme",
+  "devDependencies": {
+    "highlight.js": "^9.9.0",
+    "marked": "^0.3.6"
+  },
+  "dependencies": {
+    "page.js": "^4.13.3"
+  }
+}

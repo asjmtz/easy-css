@@ -4,8 +4,7 @@
 // to the location of paths which do not
 // match any of the following routes
 //
-const routes = ['hi', 'no']
-// page.base('/basic');
+const routes = ['base', 'component', 'layout', '342']
 // page('/', index);
 // page('/about', about);
 // page('/contact', contact);
@@ -15,6 +14,8 @@ function initRoute (argument) {
 	// 	page('/'+ item, route);
 	// })
 	// page('/', ()=>{});
+	// page.base(location.pathname);
+	// page.base(location.pathname);
 	page('*', route);
 
 	page({
@@ -35,40 +36,22 @@ function get(url){
 
 function route (ctx, next) {
 	console.log(ctx)
+	// ctx.path : '/XX' or '/' 
 	let ctxPath = ctx.path.substr(1)
-	// not found
-	if ( routes.indexOf(ctxPath) !== -1 || ctxPath == '' ) {
-		const routePath = ctxPath == '' ? routes[0] : ctxPath
-		get(`src/page/${routePath}.html`).then((data)=>{
+	let rootPath = location.pathname.substr(1)
+	// if not found
+	if ( routes.indexOf(ctxPath) !== -1 || ctxPath == rootPath ) {
+		const routePath = ctxPath == rootPath ? routes[0] : ctxPath
+		get(`page/${routePath}.html`).then((data)=>{
 	  		document.querySelector('p')
 		    .innerHTML = data;
 		})
 	  	document.querySelector('p').textContent = 'loading';
 	}
 	else {
+		// 404
 		notfound()
 	}
-
-	// if 404 , return next() or redirect to 404 
-	// next()
-}
-
-function index() {
-	get('src/page/hi.html').then((data)=>{
-  		document.querySelector('p')
-	    .innerHTML = data;
-	})
-  	document.querySelector('p').textContent = 'loading';
-}
-
-function about() {
-  document.querySelector('p')
-    .textContent = 'viewing about';
-}
-
-function contact(ctx) {
-  document.querySelector('p')
-    .textContent = 'viewing contact ' + (ctx.params.contactName || '');
 }
 
 function notfound(ctx) {

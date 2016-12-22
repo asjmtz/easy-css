@@ -4,7 +4,8 @@
   "description": "I am summarizing my CSS guideline.",
   "main": "index.js",
   "scripts": {
-    "build": "node build/build.js"
+    "build": "gulp",
+    "dev": "gulp dev",
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,9 @@
   },
   "homepage": "https://github.com/asjmtz/easy-css#readme",
   "devDependencies": {
+    "gh-pages": "^0.12.0",
+    "gulp": "^3.9.1",
     "highlight.js": "^9.9.0",
-    "marked": "^0.3.6"
   },
   "dependencies": {
     "page.js": "^4.13.3"

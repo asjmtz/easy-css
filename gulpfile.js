@@ -46,13 +46,13 @@ gulp.task('dev', [ 'default', 'watch'], function () {
 gulp.task( 'publish', ['default'], function(){
 
 	ghpages.publish( outputPath , {
-  user: {
-    name: 'asjmtz',
-    email: 'asjmtz@gmail.com'
-  }
-}, function(err) { 
+	  user: {
+	    name: 'asjmtz',
+	    email: 'asjmtz@gmail.com'
+	  }
+	}, function(err) { 
 		if( err ){ throw err }
-	});git 
+	}); 
 } )
 // gulp.task('connectDev', function () {
 //   	connect.server({

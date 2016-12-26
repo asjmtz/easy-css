@@ -10,7 +10,7 @@ const srcPath = path.join( __dirname, 'src' );
 const outputPath = path.join( __dirname, 'dist')
 
 gulp.task('clean', function() {
-	gulp.src( outputPath + '/**/*', { read: false } )
+	gulp.src( outputPath, { read: false } )
 		.pipe( clean() )
 })
 
@@ -21,7 +21,7 @@ gulp.task('default', [ 'clean', 'marked' ], function() {
 });
 
 gulp.task('marked', function() {
-	gulp.src( srcPath + '/**/*.md' )
+	return gulp.src( srcPath + '/**/*.md' )
 		.pipe( markdown({
 		  	highlight: function (code) {
 		    	return highlightJS.highlightAuto(code).value;

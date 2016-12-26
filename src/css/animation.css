@@ -1,0 +1,10 @@
+/* animation */
+
+.transition{
+	transition: all 300ms ease-out;
+}
+
+.transition.slide{
+  	transform: translateX(100px);
+  	opacity: 0;
+}

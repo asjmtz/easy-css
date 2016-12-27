@@ -4,7 +4,10 @@
 // to the location of paths which do not
 // match any of the following routes
 //
-const routes = ['base', 'component', 'layout', '342']
+const routes = ['base', 'component', 'layout', '342', 'color', 'base-element']
+const Container = document.querySelector('.main-container')
+const Page = document.querySelector('.page')
+
 // page('/', index);
 // page('/about', about);
 // page('/contact', contact);
@@ -16,7 +19,7 @@ function initRoute (argument) {
 	// page('/', ()=>{});
 	// page.base(location.pathname);
 	// page.base(location.pathname);
-	page('*', route);
+	page('*', transition, route);
 
 	page({
 		hashbang:true
@@ -33,6 +36,18 @@ function get(url){
 	})
 }
 
+function transition (ctx, next) {
+	if (ctx.init) {
+		next();
+	} else {
+		Container.classList.add('slide');
+		setTimeout(function(){
+			Container.classList.remove('slide');
+			next();
+		}, 400);
+	}
+}
+	
 
 function route (ctx, next) {
 	console.log(ctx)
@@ -43,10 +58,9 @@ function route (ctx, next) {
 	if ( routes.indexOf(ctxPath) !== -1 || ctxPath == rootPath ) {
 		const routePath = ctxPath == rootPath ? routes[0] : ctxPath
 		get(`page/${routePath}.html`).then((data)=>{
-	  		document.querySelector('p')
-		    .innerHTML = data;
+	  		Page.innerHTML = data;
 		})
-	  	document.querySelector('p').textContent = 'loading';
+	  	Page.textContent = 'loading';
 	}
 	else {
 		// 404
@@ -55,6 +69,5 @@ function route (ctx, next) {
 }
 
 function notfound(ctx) {
-  document.querySelector('p')
-    .textContent = 'not found';
+	Page.textContent = 'not found';
 }

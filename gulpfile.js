@@ -82,7 +82,7 @@ gulp.task( 'publish', ['default'], function(){
 	ghpages.publish( outputPath , {
 	  user: {
 	    name: 'asjmtz',
-	    email: 'asjmtz@gmail.com'
+	    email: 'asjmtzhang@gmail.com'
 	  }
 	}, function(err) { 
 		if( err ){ throw err }

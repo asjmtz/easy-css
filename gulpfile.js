@@ -5,21 +5,18 @@ const markdown = require('gulp-markdown');
 const connect = require('gulp-connect');
 const clean = require('gulp-clean');
 const ghpages = require('gh-pages');
+const sass = require('gulp-sass');
 
 const srcPath = path.join( __dirname, 'src' );
 const outputPath = path.join( __dirname, 'dist')
 
 gulp.task('clean', function() {
-	gulp.src( outputPath, { read: false } )
+	return gulp.src( outputPath, { read: false } )
 		.pipe( clean() )
 })
 
-gulp.task('default', [ 'clean', 'marked' ], function() {
-	gulp.src( [srcPath + '/**/*','!/**/*.md'] )
-		.pipe( gulp.dest( outputPath ) )
-		.pipe(connect.reload())
-});
-
+// we need clean done before marked 
+// so add a clean as a dependency in marked task
 gulp.task('marked', function() {
 	return gulp.src( srcPath + '/**/*.md' )
 		.pipe( markdown({
@@ -28,11 +25,47 @@ gulp.task('marked', function() {
 		  	}
 		}) )
 		.pipe( gulp.dest( outputPath ) )
+		.pipe(connect.reload())
 });
 
-gulp.task('watch', function() {
-	gulp.watch( 'src/**/*' , ['default']);
+/**
+ * copy file to dist
+ */
+gulp.task( 'normal', function () {
+	return gulp.src( ['src/**/*','!src/**/*.md','!src/**/*.scss'] )
+		.pipe( gulp.dest( outputPath ) )
+		.pipe(connect.reload())
+} )
+
+
+
+gulp.task('sass',  function () {
+  return gulp.src(srcPath + '/css/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest( outputPath+'/css' ))
+    .pipe(connect.reload())
+});
+
+gulp.task( 'build', ['marked', 'sass', 'normal']  )
+
+gulp.task('default', [ 'build'  ]);
+ 
+gulp.task('sass:watch', function () {
+	return gulp.watch(srcPath + '/css/**/*.scss', ['sass']);
+});
+
+
+gulp.task('marked:watch', function() {
+	return gulp.watch( srcPath + '/**/*.md' , ['marked']);
 })
+
+gulp.task('normal:watch', function() {
+	return gulp.watch( ['src/**/*','!src/**/*.md','!src/**/*.scss'] , ['normal']);
+})
+
+
+gulp.task('watch', ['marked:watch', 'sass:watch', 'normal:watch' ])
+
 
 gulp.task('dev', [ 'default', 'watch'], function () {
 	connect.server({
@@ -42,7 +75,8 @@ gulp.task('dev', [ 'default', 'watch'], function () {
   	});
 
 });
- 
+
+
 gulp.task( 'publish', ['default'], function(){
 
 	ghpages.publish( outputPath , {
@@ -54,19 +88,3 @@ gulp.task( 'publish', ['default'], function(){
 		if( err ){ throw err }
 	}); 
 } )
-// gulp.task('connectDev', function () {
-//   	connect.server({
-// 	    name: 'Dev server',
-//     	root: 'src',
-//     	livereload: true
-//   	});
-// });
-
-// gulp.task('connectDist', function () {
-// 	connect.server({
-// 	    name: 'Dist App',
-// 	    root: 'dist',
-// 	    port: 8001,
-// 	    livereload: true
-//   	});
-// });

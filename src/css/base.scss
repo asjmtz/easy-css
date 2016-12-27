@@ -1,0 +1,13 @@
+/* base.scss */
+@import 'normalize';
+@import 'color';
+
+$font-size: 16px !default;
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN", sans-serif!default;
+$line-height: 1.35 !default;
+
+html {
+	font-size: $font-size;
+	font-family: $font-family;
+	line-height: $line-height;
+}

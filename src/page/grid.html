@@ -1,0 +1,115 @@
+<style type="text/css">
+	#page {
+		display: grid;
+		width: 100%;
+		height: 250px;
+		grid-template-areas: "head head"
+		"nav  main"
+		"nav  foot";
+		grid-template-rows: 50px 1fr 30px;
+		grid-template-columns: 150px 1fr;
+	}
+
+	#page > header {
+		grid-area: head;
+		background-color: #8ca0ff;
+	}
+
+	#page > nav {
+		grid-area: nav;
+		background-color: #ffa08c;
+	}
+
+	#page > main {
+		grid-area: main;
+		background-color: #ffff64;
+	}
+
+	#page > footer {
+		grid-area: foot;
+		background-color: #8cffa0;
+	}	
+
+</style>
+
+<style type="text/css">
+	/*grid test */
+	/* Implemented behind the experimental Web Platform features flag in chrome://flags */
+	.wrapper { 
+		display: grid;
+		grid-template-columns: 100px 200px auto;
+		grid-template-rows: auto 200px;
+		grid-gap: 10px;
+		background-color: #fff;
+		color: #444;
+	} 
+
+	.box { 
+		background-color: #444; 
+		color: #fff; 
+		border-radius: 5px; 
+		padding: 20px; 
+		font-size: 150%; 
+	}
+
+
+</style>
+
+<style>
+	#grid {
+		height: 200px;
+		width: 200px;
+		display: grid;
+		grid-gap: 10px;
+		grid-template: repeat(4, 1fr) / repeat(2, 1fr);
+		grid-auto-flow: column;  /* or 'row', 'row dense', 'column dense' */
+	}
+
+	#item1 {
+		background-color: lime;
+		grid-row-start: 3;
+	}
+
+	#item2 {
+		background-color: yellow;
+	}
+
+	#item3 {
+		background-color: blue;
+	}
+
+	#item4 {
+		grid-column-start: 2;
+		background-color: red;
+	}
+
+	#item5 {
+		background-color: aqua;
+	}
+	
+</style>
+
+<div class="wrapper">
+	<div class="box a">a</div>
+	<div class="box b">b</div>
+	<div class="box c">c</div>
+	<div class="box d">d</div>
+	<div class="box e">e</div>
+	<div class="box f">f</div>
+</div>
+
+<section id="page">
+	<header>Header</header>
+	<nav>Navigation</nav>
+	<main>Main area</main>
+	<footer>Footer</footer>
+</section>
+
+<div id="grid">
+	<div id="item1">1</div>
+	<div id="item2">2</div>
+	<div id="item3">3</div>
+	<div id="item4">4</div>
+	<div id="item5">5</div>
+</div>
+

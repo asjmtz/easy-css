@@ -4,7 +4,7 @@
 // to the location of paths which do not
 // match any of the following routes
 //
-const routes = ['base', 'component', 'layout', '342', 'color', 'base-element']
+const routes = ['base', 'component', 'layout', '342', 'color', 'base-element', 'grid']
 const Container = document.querySelector('.main-container')
 const Page = document.querySelector('.page')
 

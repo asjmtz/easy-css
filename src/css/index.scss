@@ -1,6 +1,7 @@
-/* base.scss */
 @import 'normalize';
 @import 'color';
+@import 'animation';
+@import 'layout';
 
 $font-size: 16px !default;
 $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN", sans-serif!default;
@@ -10,4 +11,9 @@ html {
 	font-size: $font-size;
 	font-family: $font-family;
 	line-height: $line-height;
+	& ::selection {
+		background: #00d1b2;
+		color: white;
+	}
 }
+
